@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Form</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="formwarpper">
+      <h2>Contact Info</h2>
+      <form>
+        <!-- =====nameSection====== -->
+        <div class="row">
+          <div class="col">
+            <label for="fullname">Name (First & Last)</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="fullname"
+            />
+          </div>
+          <div class="col">
+            <label for="Email">Email</label>
+            <input
+              type="email"
+              id="Email"
+              name="Email"
+              placeholder="someone@example.com"
+            />
+          </div>
+        </div>
+        <!-- =====phone section==== -->
+        <div class="row">
+          <div class="col">
+            <label for="CompanyName">Company Name</label>
+            <input
+              type="text"
+              id="CompanyName"
+              name="CompanyName"
+              placeholder=""
+            />
+          </div>
+          <div class="col">
+            <label for="Phone">Phone</label>
+            <input type="text" id="Phone" name="Phone" placeholder=" ()   -" />
+          </div>
+        </div>
+        <!-- ========How did you hear about us?======== -->
+        <div class="row about">
+          <label for="about">How did you hear about us?</label>
+          <input
+            type="text"
+            id="about"
+            name="about"
+            placeholder=""
+          />
+        </div>
+        <!-- reOrder section -->
+        <div class="form-section" id="orderSection">
+          <p><b>Is this a reorder?</b></p>
+          <label>
+            <input
+              type="radio"
+              name="choice"
+              value="yes"
+              onclick="toggleSections()"
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="choice"
+              value="no"
+              onclick="toggleSections()"
+            />
+            No
+          </label>
+        </div>
+
+        <!-- Second Section (Shown if Yes is selected) -->
+        <div id="section-yes" class="form-section hidden">
+          <div class="row">
+            <h2>Reorder</h2>
+            <p>You selected "Yes". Please provide additional details below:</p>
+            <label for="InvoiceNumber"></label>
+            <input
+              type="number"
+              id="InvoiceNumber"
+              name="InvoiceNumber"
+              placeholder="Tx:123456"
+            />
+          </div>
+          <div class="row">
+            <h4>Does this reorder have the same Size(s) as your last order?</h4>
+            <label
+              ><input
+                type="radio"
+                id="orderYes"
+                name="order"
+                value="Yes"
+              />Yes</label
+            >
+            <label
+              ><input
+                type="radio"
+                id="orderno"
+                name="order"
+                value="No"
+              />No</label
+            >
+          </div>
+        </div>
+
+        <!-- Third Section (Shown if No is selected) -->
+        <div id="section-no" class="form-section hidden">
+          <h3>Third Section</h3>
+          <p>You selected "No". Please specify why:</p>
+          <textarea placeholder="Enter reason..."></textarea>
+        </div>
+
+        <button type="button" class="submitBTN" onclick="handleClick()">
+          submit
+        </button>
+      </form>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
