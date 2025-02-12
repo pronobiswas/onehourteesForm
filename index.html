@@ -5,33 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Form</title>
     <link rel="stylesheet" href="./style.css" />
+    <!-- *****fontfamily**** -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+     <!-- *****fontfamily**** -->
   </head>
   <body>
+
     <div class="formwarpper">
       <h2>Contact Info</h2>
       <form>
         <!-- =====nameSection====== -->
         <div class="row">
-          <div class="col">
+          <div class="col requires">
             <label for="fullname">Name (First & Last)</label>
             <input
               type="text"
               id="fullname"
               name="fullname"
               placeholder="fullname"
+              oninput="handleChange(event)"
+              required
             />
+            <div class="error hidden" id="nameError"></div>
           </div>
-          <div class="col">
-            <label for="Email">Email</label>
+
+          <div class="col requires">
+            <label for="email">Email</label>
             <input
               type="email"
-              id="Email"
-              name="Email"
+              id="email"
+              name="email"
               placeholder="someone@example.com"
+              oninput="handleChange(event)"
             />
+            <div class="error hidden" id="emailError"></div>
           </div>
         </div>
-        <!-- =====phone section==== -->
+        <!-- =====company section==== -->
         <div class="row">
           <div class="col">
             <label for="CompanyName">Company Name</label>
@@ -40,93 +52,177 @@
               id="CompanyName"
               name="CompanyName"
               placeholder=""
+              oninput="handleChange(event)"
             />
           </div>
-          <div class="col">
-            <label for="Phone">Phone</label>
-            <input type="text" id="Phone" name="Phone" placeholder=" ()   -" />
+          <!-- =====phone section==== -->
+          <div class="col requires">
+            <label for="phone">Phone</label>
+            <input 
+            type="text" 
+            id="phone" 
+            name="phone" 
+            placeholder=" ()   -"
+            oninput="handleChange(event)" />
+            <div class="error hidden" id="PhoneError"></div>
           </div>
         </div>
         <!-- ========How did you hear about us?======== -->
-        <div class="row about">
+        <div class="row about requires">
           <label for="about">How did you hear about us?</label>
           <input
             type="text"
             id="about"
             name="about"
             placeholder=""
+            oninput="handleChange(event)"
           />
+          <div class="error hidden" id="aboutError"></div>
         </div>
-        <!-- reOrder section -->
-        <div class="form-section" id="orderSection">
-          <p><b>Is this a reorder?</b></p>
-          <label>
+        <!-- =====reOrder section===== -->
+        <div class=" orderSection  " id="reOrder">
+          <p><b>Does this reorder have the same Size(s) as your last order??</b></p>
+          <!-- =====reOrder radio box======== -->
+          <div class="radiobox">
+            <label for="yesOption">Yes</label>
             <input
               type="radio"
+              id="yesOption"
               name="choice"
               value="yes"
               onclick="toggleSections()"
             />
-            Yes
-          </label>
-          <label>
+          </div>
+          <div class="radiobox">
+            <label for="noOption">No</label>
             <input
               type="radio"
               name="choice"
+              id="noOption"
               value="no"
               onclick="toggleSections()"
             />
-            No
-          </label>
+          </div>
+
         </div>
 
-        <!-- Second Section (Shown if Yes is selected) -->
+        <!-- =========Second Section (Shown if Yes is selected)======== -->
+
+
         <div id="section-yes" class="form-section hidden">
+          <!-- ====prreviousInvoiceNumber==== -->
           <div class="row">
-            <h2>Reorder</h2>
-            <p>You selected "Yes". Please provide additional details below:</p>
-            <label for="InvoiceNumber"></label>
-            <input
-              type="number"
-              id="InvoiceNumber"
-              name="InvoiceNumber"
-              placeholder="Tx:123456"
-            />
-          </div>
-          <div class="row">
-            <h4>Does this reorder have the same Size(s) as your last order?</h4>
-            <label
-              ><input
-                type="radio"
-                id="orderYes"
-                name="order"
-                value="Yes"
-              />Yes</label
-            >
-            <label
-              ><input
-                type="radio"
-                id="orderno"
-                name="order"
-                value="No"
-              />No</label
-            >
-          </div>
-        </div>
+            <!-- ======invoice number==== -->
+            <div>
+              <h3>Reorder</h3>
+              <div class=" requires">
+                <label for="invoiceNumber">Previous Invoice Number</label>
+                <input
+                  type="number"
+                  id="invoiceNumber"
+                  name="invoiceNumber"
+                  placeholder="Tx:123456"
+                  oninput="handleChange(event)"
+                />
+              </div>
+            </div>
 
-        <!-- Third Section (Shown if No is selected) -->
+          </div>
+
+
+          <!-- ===========last order========== -->
+          <!-- ========does the order have same size====== -->
+           <div class="hidden" id="lastOrder">
+
+             <div class="row " >
+               <h4>Does this reorder have the same Size(s) as your last order?</h4>
+               <label
+                 ><input
+                   type="radio"
+                   id="orderYes"
+                   name="order"
+                   value="Yes"
+                 />Yes</label
+               >
+               <label
+                 ><input
+                   type="radio"
+                   id="orderno"
+                   name="order"
+                   value="No"
+                 />No</label
+               >
+             </div>
+           </div>
+        </div>
+        <!-- =========no section======= -->
+        <!-- ========Third Section (Shown if No is selected)======= -->
         <div id="section-no" class="form-section hidden">
-          <h3>Third Section</h3>
-          <p>You selected "No". Please specify why:</p>
-          <textarea placeholder="Enter reason..."></textarea>
+          <h3>Order Info</h3>
+          <h5>Garments</h5>
+          <!-- ======garments======== -->
+           <div class="garmentsForm">
+
+             <div class="row">
+              <!-- ===garmentType===== -->
+               <div class="col requires">
+                 <p>Garment Type
+                  What garment type would you like?</p>
+                   <p>
+                     ( <a href="#">Garment Type
+                       What garment type would you like?</a> )
+                   </p>
+                   <input type="text" name="garmentsType" id="garmentsType" placeholder="Lorem ipsum dolor." oninput="handleChange(event)">
+               </div>
+               <!-- ======color======== -->
+               <div class="col requires">
+                 <p>Color
+                  1000's of colors available</p>
+                   <p>
+                     ( <a href="#" >click here</a> )
+                   </p>
+                   <input type="text" name="color" id="color" placeholder="Lorem, ipsum dolor." oninput="handleChange(event)">
+               </div>
+               <!-- ====size==== -->
+               <div class="col requires">
+                 <p>Size(s)
+                  Please choose the size(s) for this garment by typing them below</p>
+                   <input type="text" id="size" name="size" placeholder="Lorem, ipsum dolor." oninput="handleChange(event)">
+               </div>
+
+              </div>
+            </div>
+            <button type="button" class="garmentsBtn">ADD ADDITIONAL GARMENT TO ORDER</button>
+            <!-- ===guantity== -->
+             <div class="row">
+              <div class="col requires">
+                <h5>Total Quantity</h5>
+                <input type="number" id="quantity" name="quantity" placeholder="" oninput="handleChange(event)" required>
+              </div>
+             </div>
         </div>
 
+
+        <!-- ====================================================== -->
+         <!-- ===========orderInfo======= -->
+         <!-- ======garmentsList======= -->
+         <div class="" id="orderInfo">
+             <h2>Order Info</h2>
+             <div id="showGarmentsbox" class="hidden">
+
+               <h2>Please list garment style, sizes and color:</h2>
+               <textarea name="garmentsList" id="garmentsList" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt.sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt."></textarea>
+             </div>
+            
+           </div>
+        <!-- ===============form button========== -->
+         <!-- ===============form button========== -->
         <button type="button" class="submitBTN" onclick="handleClick()">
-          submit
+          Next
         </button>
       </form>
     </div>
 
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
