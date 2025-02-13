@@ -1,434 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dynamic Form</title>
-    <link rel="stylesheet" href="./style.css" />
-    <!-- *****fontfamily**** -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- *****fontfamily**** -->
-  </head>
-  <body>
-    <div class="formwarpper">
-      <h2>Contact Info</h2>
-      <form>
-        <!-- =====nameSection====== -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Form</title>
+  <link rel="stylesheet" href="./style.css" />
+  <!-- *****fontfamily**** -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap"
+    rel="stylesheet" />
+  <!-- *****fontfamily**** -->
+</head>
+
+<body>
+  <div class="formwarpper">
+    <h2>Contact Info</h2>
+    <form>
+      <!-- =====nameSection====== -->
+      <div class="row">
+        <div class="col requires">
+          <label for="fullname">Name (First & Last)</label>
+          <input type="text" id="fullname" name="fullname" placeholder="fullname" oninput="handleChange(event)"
+            required />
+          <div class="error hidden" id="nameError"></div>
+        </div>
+
+        <div class="col requires">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="someone@example.com" oninput="handleChange(event)" />
+          <div class="error hidden" id="emailError"></div>
+        </div>
+      </div>
+      <!-- =====company section==== -->
+      <div class="row">
+        <div class="col">
+          <label for="CompanyName">Company Name</label>
+          <input type="text" id="CompanyName" name="CompanyName" placeholder="" oninput="handleChange(event)" />
+        </div>
+        <!-- =====phone section==== -->
+        <div class="col requires">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" name="phone" placeholder=" ()   -" oninput="handleChange(event)" />
+          <div class="error hidden" id="PhoneError"></div>
+        </div>
+      </div>
+      <!-- ========How did you hear about us?======== -->
+      <div class="row about requires">
+        <label for="about">How did you hear about us?</label>
+        <input type="text" id="about" name="about" placeholder="" oninput="handleChange(event)" />
+        <div class="error hidden" id="aboutError"></div>
+      </div>
+      <!-- =====reOrder section===== -->
+      <div class="orderSection " id="reOrder">
+        <p><b>Is this a order??</b></p>
+
+        <div class="radiobox">
+          <label for="yesOption">Yes</label>
+          <input type="radio" id="yesOption" name="choice" value="yes" onclick="toggleSections()" />
+        </div>
+        <div class="radiobox">
+          <label for="noOption">No</label>
+          <input type="radio" name="choice" id="noOption" value="no" onclick="toggleSections()" />
+        </div>
+      </div>
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+      <!-- =========Second Section (Shown if Yes is selected)======== -->
+      <div id="section-yes" class="form-section hidden">
+        <!-- ====prreviousInvoiceNumber==== -->
         <div class="row">
-          <div class="col requires">
-            <label for="fullname">Name (First & Last)</label>
-            <input
-              type="text"
-              id="fullname"
-              name="fullname"
-              placeholder="fullname"
-              oninput="handleChange(event)"
-              required
-            />
-            <div class="error hidden" id="nameError"></div>
-          </div>
-
-          <div class="col requires">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="someone@example.com"
-              oninput="handleChange(event)"
-            />
-            <div class="error hidden" id="emailError"></div>
+          <!-- ======invoice number==== -->
+          <div>
+            <h3>Reorder</h3>
+            <div class="requires">
+              <label for="invoiceNumber">Previous Invoice Number</label>
+              <input type="number" id="invoiceNumber" name="invoiceNumber" placeholder="Tx:123456"
+                oninput="handleChange(event)" />
+            </div>
           </div>
         </div>
-        <!-- =====company section==== -->
-        <div class="row">
-          <div class="col">
-            <label for="CompanyName">Company Name</label>
-            <input
-              type="text"
-              id="CompanyName"
-              name="CompanyName"
-              placeholder=""
-              oninput="handleChange(event)"
-            />
-          </div>
-          <!-- =====phone section==== -->
-          <div class="col requires">
-            <label for="phone">Phone</label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder=" ()   -"
-              oninput="handleChange(event)"
-            />
-            <div class="error hidden" id="PhoneError"></div>
+        <!-- ========does the order have same size====== -->
+        <div class="hidden" id="lastOrder">
+          <div class="">
+            <h4>
+              Does this reorder have the same Size(s) as your last order?
+            </h4>
+            <div class="radiobox">
+              <label for="yesOption1">Yes</label>
+              <input type="radio" id="yesOption1" name="choice1" value="true" onclick="lastOrder()" />
+            </div>
+            <div class="radiobox">
+              <label for="noOption2">No</label>
+              <input type="radio" name="choice1" id="noOption2" value="false" onclick="lastOrder()" />
+            </div>
           </div>
         </div>
-        <!-- ========How did you hear about us?======== -->
-        <div class="row about requires">
-          <label for="about">How did you hear about us?</label>
-          <input
-            type="text"
-            id="about"
-            name="about"
-            placeholder=""
-            oninput="handleChange(event)"
-          />
-          <div class="error hidden" id="aboutError"></div>
-        </div>
-        <!-- =====reOrder section===== -->
-        <div class="orderSection" id="reOrder">
-          <p><b>Is this a order??</b></p>
-
-          <div class="radiobox">
-            <label for="yesOption">Yes</label>
-            <input
-              type="radio"
-              id="yesOption"
-              name="choice"
-              value="yes"
-              onclick="toggleSections()"
-            />
-          </div>
-          <div class="radiobox">
-            <label for="noOption">No</label>
-            <input
-              type="radio"
-              name="choice"
-              id="noOption"
-              value="no"
-              onclick="toggleSections()"
-            />
-          </div>
-        </div>
-
-        <!-- =========Second Section (Shown if Yes is selected)======== -->
-        <div id="section-yes" class="form-section hidden">
-          <!-- ====prreviousInvoiceNumber==== -->
+      </div>
+      <!-- ========Third Section (Shown if No is selected)======= -->
+      <div id="section-no" class="form-section hidden">
+        <h3>Order Info</h3>
+        <h5>Garments</h5>
+        <!-- ======garments======== -->
+        <div class="garmentsForm">
           <div class="row">
-            <!-- ======invoice number==== -->
-            <div>
-              <h3>Reorder</h3>
-              <div class="requires">
-                <label for="invoiceNumber">Previous Invoice Number</label>
-                <input
-                  type="number"
-                  id="invoiceNumber"
-                  name="invoiceNumber"
-                  placeholder="Tx:123456"
-                  oninput="handleChange(event)"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- ===========last order========== -->
-          <!-- ========does the order have same size====== -->
-          <div class="hidden" id="lastOrder">
-            <div class="row">
-              <h4>
-                Does this reorder have the same Size(s) as your last order?
-              </h4>
-              <label
-                ><input
-                  type="radio"
-                  id="orderYes"
-                  name="order"
-                  value="Yes"
-                />Yes</label
-              >
-              <label
-                ><input
-                  type="radio"
-                  id="orderno"
-                  name="order"
-                  value="No"
-                />No</label
-              >
-            </div>
-          </div>
-        </div>
-        <!-- ========Third Section (Shown if No is selected)======= -->
-        <div id="section-no" class="form-section hidden">
-          <h3>Order Info</h3>
-          <h5>Garments</h5>
-          <!-- ======garments======== -->
-          <div class="garmentsForm">
-            <div class="row">
-              <!-- ===garmentType===== -->
-              <div class="col requires">
-                <p>Garment Type What garment type would you like?</p>
-                <p>
-                  (
-                  <a href="#">Garment Type What garment type would you like?</a>
-                  )
-                </p>
-                <input
-                  type="text"
-                  name="garmentsType"
-                  id="garmentsType"
-                  placeholder="Lorem ipsum dolor."
-                  oninput="handleChange(event)"
-                />
-              </div>
-              <!-- ======color======== -->
-              <div class="col requires">
-                <p>Color 1000's of colors available</p>
-                <p>( <a href="#">click here</a> )</p>
-                <input
-                  type="text"
-                  name="color"
-                  id="color"
-                  placeholder="Lorem, ipsum dolor."
-                  oninput="handleChange(event)"
-                />
-              </div>
-              <!-- ====size==== -->
-              <div class="col requires">
-                <p>
-                  Size(s) Please choose the size(s) for this garment by typing
-                  them below
-                </p>
-                <input
-                  type="text"
-                  id="size"
-                  name="size"
-                  placeholder="Lorem, ipsum dolor."
-                  oninput="handleChange(event)"
-                />
-              </div>
-            </div>
-          </div>
-          <button type="button" class="garmentsBtn">
-            ADD ADDITIONAL GARMENT TO ORDER
-          </button>
-          <!-- ===guantity== -->
-          <div class="row">
+            <!-- ===garmentType===== -->
             <div class="col requires">
-              <h5>Total Quantity</h5>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                placeholder=""
-                oninput="handleChange(event)"
-                required
-              />
+              <p>Garment Type What garment type would you like?</p>
+              <p>
+                (
+                <a href="#">Garment Type What garment type would you like?</a>
+                )
+              </p>
+              <input type="text" name="garmentsType" id="garmentsType" placeholder="Lorem ipsum dolor."
+                oninput="handleChange(event)" />
+            </div>
+            <!-- ======color======== -->
+            <div class="col requires">
+              <p>Color 1000's of colors available</p>
+              <p>( <a href="#">click here</a> )</p>
+              <input type="text" name="color" id="color" placeholder="Lorem, ipsum dolor."
+                oninput="handleChange(event)" />
+            </div>
+            <!-- ====size==== -->
+            <div class="col requires">
+              <p>
+                Size(s) Please choose the size(s) for this garment by typing
+                them below
+              </p>
+              <input type="text" id="size" name="size" placeholder="Lorem, ipsum dolor."
+                oninput="handleChange(event)" />
             </div>
           </div>
         </div>
+        <button type="button" class="garmentsBtn">
+          ADD ADDITIONAL GARMENT TO ORDER
+        </button>
+        <!-- ===guantity== -->
+        <div class="row">
+          <div class="col requires">
+            <h5>Total Quantity</h5>
+            <input type="number" id="quantity" name="quantity" placeholder="" oninput="handleChange(event)" required />
+          </div>
+        </div>
+      </div>
 
-        <!-- ====================================================== -->
-        <!-- ===========orderInfo======= -->
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+      <!-- =====turn around==== -->
+      <section id="theTurnaround" class="hidden">
+        <!-- ======garmentsList======= -->
+        <div class="hidden" id="orderInfo">
+          <h2>Order Info</h2>
+          <div id="showGarmentsbox" class="">
+            <h2>Please list garment style, sizes and color:</h2>
+            <textarea name="garmentsList" id="garmentsList"
+              placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt.sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt."></textarea>
+          </div>
+        </div>
 
-        <!-- =====turn around==== -->
-        <section id="theTurnaround" class="hidden">
-          <!-- ======garmentsList======= -->
-          <div class="hidden" id="orderInfo ">
-            <h2>Order Info</h2>
-            <div id="showGarmentsbox" class="">
-              <h2>Please list garment style, sizes and color:</h2>
-              <textarea
-                name="garmentsList"
-                id="garmentsList"
-                placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt.sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt."
-              ></textarea>
+        <h3>Turnaround</h3>
+        <div class="rows">
+          <h5>Turnaround</h5>
+          <!-- picup -->
+          <div class="raidobx">
+            <div class="flex-start">
+              <input type="radio" name="isTurnaround" id="inChicago" value="true" onclick="turnaround()" />
+              <label for="inChicago">Pick up in Chicago on date below(NOTE: All orders are set to
+                be completed at 4:30PM on date requested. If you need the
+                order completed earlier, please select a sooner date. We are
+                not open on weekends)</label>
+            </div>
+            <div>
+              <input type="radio" name="isTurnaround" id="notInChicago" value="false" onclick="turnaround()" />
+              <label for="notInChicago">Ship order on date below &nbsp; (The day your order will
+                ship, not arrive) &nbsp; <a href="#">Check transit times</a>
+              </label>
             </div>
           </div>
-          <h3>Turnaround</h3>
-          <div class="rows">
-            <h5>Turnaround</h5>
-            <!-- picup -->
-            <div class="raidobx">
-              <div class="flex-start">
-                <input
-                  type="radio"
-                  name="isTurnaround"
-                  id="inChicago"
-                  value="true"
-                  onclick="turnaround()"
-                />
-                <label for="inChicago"
-                  >Pick up in Chicago on date below(NOTE: All orders are set to
-                  be completed at 4:30PM on date requested. If you need the
-                  order completed earlier, please select a sooner date. We are
-                  not open on weekends)</label
-                >
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  name="isTurnaround"
-                  id="notInChicago"
-                  value="false"
-                  onclick="turnaround()"
-                />
-                <label for="notInChicago"
-                  >Ship order on date below &nbsp; (The day your order will
-                  ship, not arrive) &nbsp; <a href="#">Check transit times</a>
-                </label>
-              </div>
-            </div>
-            <!-- date -->
-            <div class="col container">
-              <label for="date">Date</label>
-              <input type="time" />
-            </div>
-            <!-- daysaround -->
-            <div class="row">
-              <h1>7+ day turnaround</h1>
-            </div>
-            <!-- need4:30 -->
-            <h5>
-              Do you need your order before 4:30pm on the date chosen above?
-            </h5>
-            <p>
-              (If you answer yes, your turnaround time may change and you will
-              be charged extra.)
-            </p>
-            <div class="raioRow">
-              <div class="radiobox">
-                <input type="radio" id="DateYes" name="dateChose" />
-                <label for="DateYes">yes</label>
-              </div>
-              <div class="radiobox">
-                <input type="radio" id="Dateno" name="dateChose" />
-                <label for="Dateno">No</label>
-              </div>
-            </div>
+          <!-- date -->
+          <div class="col container">
+            <label for="date">Date</label>
+            <input type="date" />
           </div>
-        </section>
-        <!-- ====shiping form==== -->
-        <section id="shipingform" class="hidden">
-          <form id="shipingInfo">
-            <div class="row">
-              <div class="col">
-                <label for="shipingname">Shipping Info: Name</label>
-                <input type="text" id="shipingname" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label for="reciptentCompany">Company Name</label>
-                <input type="text" id="reciptentCompany" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label for="Address2">Address</label>
-                <input type="text" id="Address" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label for="Suite2">Apartment/Unit/Suite #</label>
-                <input type="text" id="Suite2" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label for="city2">city</label>
-                <input type="text" id="city2" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label for="State2">State</label>
-                <input type="text" id="State2" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label for="Zip2">Zip</label>
-                <input type="text" id="Zip2" />
-              </div>
-            </div>
-          </form>
-        </section>
-        <!-- =====artwork===== -->
-        <section id="artwork">
-          <h1>Artwork</h1>
-          <input type="file" id="img1" />
-          <label for="img1">
-            <div class="imgContainer">
-              <img src="./image/ohtupload.jpg" alt="png" width="100%" />
-            </div>
-          </label>
-          <input type="file" id="img2" />
-          <label for="img2">
-            <div class="imgContainer">
-              <img src="./image/ohtdesign.jpg" alt="png" width="100%" />
-            </div>
-          </label>
+          <!-- daysaround -->
+          <div class="row">
+            <h1>7+ day turnaround</h1>
+          </div>
+          <!-- need4:30 -->
           <h5>
-            Does your artwork require white ink or a white ink under base?
+            Do you need your order before 4:30pm on the date chosen above?
           </h5>
           <p>
-            (If you are printing bright colors on a dark shirt, then your print
-            requires a white ink under base.)
+            (If you answer yes, your turnaround time may change and you will
+            be charged extra.)
+          </p>
+          <div class="raioRow">
+            <div class="radiobox">
+              <input type="radio" id="DateYes" name="dateChose"/>
+              <label for="DateYes">yes</label>
+            </div>
+            <div class="radiobox">
+              <input type="radio" id="Dateno" name="dateChose"/>
+              <label for="Dateno">No</label>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ====shiping form==== -->
+      <section id="shipingform" class="hidden">
+        <form id="shipingInfo">
+          <div class="row">
+            <div class="col">
+              <label for="shipingname">Shipping Info: Name</label>
+              <input type="text" id="shipingname" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="reciptentCompany">Company Name</label>
+              <input type="text" id="reciptentCompany" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Address2">Address</label>
+              <input type="text" id="Address" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Suite2">Apartment/Unit/Suite #</label>
+              <input type="text" id="Suite2" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="city2">city</label>
+              <input type="text" id="city2" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="State2">State</label>
+              <input type="text" id="State2" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Zip2">Zip</label>
+              <input type="text" id="Zip2" />
+            </div>
+          </div>
+        </form>
+      </section>
+      <!-- =====artwork===== -->
+      <section id="artwork" class="hidden">
+        <h1>Artwork</h1>
+        <input type="file" id="img1" />
+        <label for="img1">
+          <div class="imgContainer">
+            <img src="./image/ohtupload.jpg" alt="png" width="100%" />
+          </div>
+        </label>
+        <input type="file" id="img2" />
+        <label for="img2">
+          <div class="imgContainer">
+            <img src="./image/ohtdesign.jpg" alt="png" width="100%" />
+          </div>
+        </label>
+        <h5>
+          Does your artwork require white ink or a white ink under base?
+        </h5>
+        <p>
+          (If you are printing bright colors on a dark shirt, then your print
+          requires a white ink under base.)
+        </p>
+        <div class="container">
+          <div class="radiobox">
+            <input type="radio" id="id1" name="artwork" />
+            <label for="id1">yes</label>
+          </div>
+          <div class="radiobox">
+            <input type="radio" id="id2" name="artwork" />
+            <label for="id2">no</label>
+          </div>
+          <div class="radiobox">
+            <input type="radio" id="id3" name="artwork" />
+            <label for="id3">Not Sure (see colorchart)</label>
+          </div>
+        </div>
+        <div class="container">
+          <h5>
+            Would you like your image over sized? ($2.99 per print, dark color
+            garments $3.99 per print)
+          </h5>
+          <p>
+            (14 wide x 16 tall printing is available for unisex sizes only.)
+          </p>
+          <p>
+            (Our standard max print size is 12 x 12 inches for unisex sizes
+            and 10 x 12 inches for ladies and youth.)
           </p>
           <div class="container">
             <div class="radiobox">
-              <input type="radio" id="id1" name="artwork" />
-              <label for="id1">yes</label>
+              <input type="radio" id="id01" name="artwork1" onclick="artworkradio()"/>
+              <label for="id01">yes</label>
             </div>
             <div class="radiobox">
-              <input type="radio" id="id2" name="artwork" />
-              <label for="id2">no</label>
-            </div>
-            <div class="radiobox">
-              <input type="radio" id="id3" name="artwork" />
-              <label for="id3">Not Sure (see colorchart)</label>
+              <input type="radio" id="id02" name="artwork1" onclick="artworkradio()"/>
+              <label for="id02">no</label>
             </div>
           </div>
           <div class="container">
-            <h5>
-              Would you like your image over sized? ($2.99 per print, dark color
-              garments $3.99 per print)
-            </h5>
-            <p>
-              (14 wide x 16 tall printing is available for unisex sizes only.)
-            </p>
-            <p>
-              (Our standard max print size is 12 x 12 inches for unisex sizes
-              and 10 x 12 inches for ladies and youth.)
-            </p>
-            <div class="container">
-              <div class="radiobox">
-                <input type="radio" id="id01" name="artwork1" />
-                <label for="id01">yes</label>
-              </div>
-              <div class="radiobox">
-                <input type="radio" id="id02" name="artwork1" />
-                <label for="id02">no</label>
-              </div>
+            <div>
+              <label for="commentss">Comments</label>
+              <textarea name="commentss" id="commentss"></textarea>
             </div>
-            <div class="container">
-              <div>
-                <label for="commentss">Comments</label>
-                <textarea name="commentss" id="commentss"></textarea>
-              </div>
-              <div>
-                <p><label for="cuppon">Coupon Code</label></p>
-                <input type="text" id="cuppon" name="cuppon" />
-              </div>
+            <div>
+              <p><label for="cuppon">Coupon Code</label></p>
+              <input type="text" id="cuppon" name="cuppon" />
             </div>
           </div>
-        </section>
-        <!-- ===============form button========== -->
-        <!-- ===============form button========== -->
-        <button type="button" class="submitBTN" onclick="handleClick()">
-          Next
-        </button>
-      </form>
-    </div>
+        </div>
+      </section>
 
-    <script src="script.js"></script>
-  </body>
+      <!-- =======submitlist========= -->
+       <sectioin id="submiltlist" class="hidden">
+        <ul>
+          <li>You must make your full payment before we begin on your order. That includes starting any custom artwork or even ordering your garments.</li>
+          <li>Own artwork submission will print as is, unless noted otherwise. You are responsible for color matching. Colors on art submissions and design proofs may not be identical to how they come out on our machine. We have color charts in our store for you to use.</li>
+          <li>If your artwork is of a low resolution, please be aware that it may look jagged or pixelated.
+          </li>
+          <li>Artwork placement on proofs are not actual size, and used for placement purposes only. Files should be sized to the dimensions you would like them printed, if you would like your file resized we will do so only if specified. One Hour Tees will not accept responsibility for corrections not implemented and/or requested after artwork is approved. No custom artwork will be printed before your approval. Delay in approving your proofs will result in extending the order production time.</li>
+          <li>If a proof is provided, please review the following for spelling errors or graphic flaws. Once you approve the artwork you take full responsibility</li>
+          <li>If you have chosen to have your apparel shipped, once it leaves our facility you are fully responsible for the shipment. If you are worried about this, then please let us know that you would like insurance on your package. We will not be held responsible for lost packages. One Hour Tees cannot be responsible for any shipping delays caused by the shipping company.</li>
+          <li>Please review your invoice carefully. Sometimes we make mistakes on the invoices. Once you approve your invoice that is what will be printed. Please review your artwork dimensions and the sizes listed.</li>
+          <li>If you purchase our One Hour or Next Day turnaround, you must understand that mistakes do happen. If your item is not something we stock on our shelves and there is a misprint, we will not have enough time to rectify the issue. We suggest choosing standard items we stock in our location. Ask your sales person for details.</li>
+          <li>Dark colored garments with a white ink under base will have press marks and/or pretreatment marks. They will go away with 1 wash.</li>
+          <li>Dark colored DTG printing may have a 1% color variance within the same order. White's in your design may have a shade variance between garments.</li>
+          <li>There are no cancellations within 24 hours. Once you have paid for your order, you will be subject to a 15% restocking fee if you cancel your order. Once printing has begun, there are no cancellations.</li>
+          <li>Our location is only open Monday - Friday from 9am to 5pm. If you are unable to pick up during those hours you may email info@onehourtees.com to see if someone will be able to meet you at the store to pickup.</li>
+          <li>You may send someone else to pick up your order. Please make sure the person picking up knows the order details including customer's full name or business it was placed under.</li>
+        </ul>
+       </sectioin>
+      <!-- ===============form button========== -->
+      <!-- ===============form button========== -->
+      <button type="button" class="submitBTN" onclick="handleClick()">
+        Next
+      </button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>

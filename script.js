@@ -1,7 +1,10 @@
 let sectionYes = document.getElementById("section-yes");
   let sectionNo = document.getElementById("section-no");
   let theTurnaround = document.getElementById("theTurnaround");
-  let shipingform = document.getElementById("shipingform")
+  let shipingform = document.getElementById("shipingform");
+  let orderInfo = document.getElementById("orderInfo");
+  let artwork = document.getElementById("artwork");
+  let submiltlist = document.getElementById("submiltlist");
 // ======get input value=====
 let formData = {
   fullname:"",
@@ -9,7 +12,7 @@ let formData = {
   companyName:"",
   phone:"",
   about:"",
-  reOrder:'false',
+  reOrder:'',
   invoiceNumber:"",
   garmentsType:"",
   color:"",
@@ -102,8 +105,6 @@ function validateForm() {
   // ======hide or show REORDER by addeding classlist=========
   if(isValid){
     document.getElementById('reOrder').classList.remove("hidden")
-  }else{
-    document.getElementById('reOrder').classList.add("hidden")
   }
   // =======invoice validate======
   if (formData.invoiceNumber.length>5) {
@@ -167,25 +168,60 @@ function toggleSections() {
     sectionYes.classList.add("hidden");
   }
 }
+function lastOrder(){
+  let isSameAslastOrder = document.querySelector('input[name="choice1"]:checked').value;
+  if (isSameAslastOrder === "true") {
+    theTurnaround.classList.remove("hidden");
+  } else if (isSameAslastOrder === "false") {
+    orderInfo.classList.remove("hidden");
+    theTurnaround.classList.remove("hidden");
+  }
 
+  
+}
 function turnaround(){
   let pickup = document.querySelector('input[name="isTurnaround"]:checked').value;
   formData.isTurnaround = pickup;
   console.log(pickup);
 
   if (pickup === "true") {
-    shipingform.classList.remove("hidden")
+    artwork.classList.remove("hidden");
+    shipingform.classList.add("hidden");
+
+    if(formData.reOrder = true){
+      artwork.classList.add("hidden");
+      shipingform.classList.add("hidden");
+      submiltlist.classList.remove("hidden")
+    }
     
   } else if (pickup === "false") {
-    shipingform.classList.add("hidden");
+    shipingform.classList.remove("hidden");
+    artwork.classList.remove("hidden");
+    if(formData.reOrder = true){
+      artwork.classList.add("hidden");
+      shipingform.classList.remove("hidden");
+      submiltlist.classList.remove("hidden")
+    }
   }
   
 }
 
+function artworkradio (){
+  console.log(formData.reOrder);
+  
+}
 
 // ========handle submit=======
 function handleClick(){
-  console.log(formData);
-  console.log(theTurnaround);
+  
+  if(!formData.reOrder == ""){
+    console.log(typeof(formData.reOrder))
+  }else{
+    console.log(formData.reOrder);
+    
+  }
+  
+  
+  
   
 }
