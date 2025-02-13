@@ -6,13 +6,15 @@
     <title>Dynamic Form</title>
     <link rel="stylesheet" href="./style.css" />
     <!-- *****fontfamily**** -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-     <!-- *****fontfamily**** -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- *****fontfamily**** -->
   </head>
   <body>
-
     <div class="formwarpper">
       <h2>Contact Info</h2>
       <form>
@@ -58,12 +60,13 @@
           <!-- =====phone section==== -->
           <div class="col requires">
             <label for="phone">Phone</label>
-            <input 
-            type="text" 
-            id="phone" 
-            name="phone" 
-            placeholder=" ()   -"
-            oninput="handleChange(event)" />
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder=" ()   -"
+              oninput="handleChange(event)"
+            />
             <div class="error hidden" id="PhoneError"></div>
           </div>
         </div>
@@ -80,9 +83,9 @@
           <div class="error hidden" id="aboutError"></div>
         </div>
         <!-- =====reOrder section===== -->
-        <div class=" orderSection  " id="reOrder">
-          <p><b>Does this reorder have the same Size(s) as your last order??</b></p>
-          <!-- =====reOrder radio box======== -->
+        <div class="orderSection" id="reOrder">
+          <p><b>Is this a order??</b></p>
+
           <div class="radiobox">
             <label for="yesOption">Yes</label>
             <input
@@ -103,19 +106,16 @@
               onclick="toggleSections()"
             />
           </div>
-
         </div>
 
         <!-- =========Second Section (Shown if Yes is selected)======== -->
-
-
         <div id="section-yes" class="form-section hidden">
           <!-- ====prreviousInvoiceNumber==== -->
           <div class="row">
             <!-- ======invoice number==== -->
             <div>
               <h3>Reorder</h3>
-              <div class=" requires">
+              <div class="requires">
                 <label for="invoiceNumber">Previous Invoice Number</label>
                 <input
                   type="number"
@@ -126,97 +126,303 @@
                 />
               </div>
             </div>
-
           </div>
-
 
           <!-- ===========last order========== -->
           <!-- ========does the order have same size====== -->
-           <div class="hidden" id="lastOrder">
-
-             <div class="row " >
-               <h4>Does this reorder have the same Size(s) as your last order?</h4>
-               <label
-                 ><input
-                   type="radio"
-                   id="orderYes"
-                   name="order"
-                   value="Yes"
-                 />Yes</label
-               >
-               <label
-                 ><input
-                   type="radio"
-                   id="orderno"
-                   name="order"
-                   value="No"
-                 />No</label
-               >
-             </div>
-           </div>
+          <div class="hidden" id="lastOrder">
+            <div class="row">
+              <h4>
+                Does this reorder have the same Size(s) as your last order?
+              </h4>
+              <label
+                ><input
+                  type="radio"
+                  id="orderYes"
+                  name="order"
+                  value="Yes"
+                />Yes</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  id="orderno"
+                  name="order"
+                  value="No"
+                />No</label
+              >
+            </div>
+          </div>
         </div>
-        <!-- =========no section======= -->
         <!-- ========Third Section (Shown if No is selected)======= -->
         <div id="section-no" class="form-section hidden">
           <h3>Order Info</h3>
           <h5>Garments</h5>
           <!-- ======garments======== -->
-           <div class="garmentsForm">
-
-             <div class="row">
+          <div class="garmentsForm">
+            <div class="row">
               <!-- ===garmentType===== -->
-               <div class="col requires">
-                 <p>Garment Type
-                  What garment type would you like?</p>
-                   <p>
-                     ( <a href="#">Garment Type
-                       What garment type would you like?</a> )
-                   </p>
-                   <input type="text" name="garmentsType" id="garmentsType" placeholder="Lorem ipsum dolor." oninput="handleChange(event)">
-               </div>
-               <!-- ======color======== -->
-               <div class="col requires">
-                 <p>Color
-                  1000's of colors available</p>
-                   <p>
-                     ( <a href="#" >click here</a> )
-                   </p>
-                   <input type="text" name="color" id="color" placeholder="Lorem, ipsum dolor." oninput="handleChange(event)">
-               </div>
-               <!-- ====size==== -->
-               <div class="col requires">
-                 <p>Size(s)
-                  Please choose the size(s) for this garment by typing them below</p>
-                   <input type="text" id="size" name="size" placeholder="Lorem, ipsum dolor." oninput="handleChange(event)">
-               </div>
-
+              <div class="col requires">
+                <p>Garment Type What garment type would you like?</p>
+                <p>
+                  (
+                  <a href="#">Garment Type What garment type would you like?</a>
+                  )
+                </p>
+                <input
+                  type="text"
+                  name="garmentsType"
+                  id="garmentsType"
+                  placeholder="Lorem ipsum dolor."
+                  oninput="handleChange(event)"
+                />
+              </div>
+              <!-- ======color======== -->
+              <div class="col requires">
+                <p>Color 1000's of colors available</p>
+                <p>( <a href="#">click here</a> )</p>
+                <input
+                  type="text"
+                  name="color"
+                  id="color"
+                  placeholder="Lorem, ipsum dolor."
+                  oninput="handleChange(event)"
+                />
+              </div>
+              <!-- ====size==== -->
+              <div class="col requires">
+                <p>
+                  Size(s) Please choose the size(s) for this garment by typing
+                  them below
+                </p>
+                <input
+                  type="text"
+                  id="size"
+                  name="size"
+                  placeholder="Lorem, ipsum dolor."
+                  oninput="handleChange(event)"
+                />
               </div>
             </div>
-            <button type="button" class="garmentsBtn">ADD ADDITIONAL GARMENT TO ORDER</button>
-            <!-- ===guantity== -->
-             <div class="row">
-              <div class="col requires">
-                <h5>Total Quantity</h5>
-                <input type="number" id="quantity" name="quantity" placeholder="" oninput="handleChange(event)" required>
-              </div>
-             </div>
+          </div>
+          <button type="button" class="garmentsBtn">
+            ADD ADDITIONAL GARMENT TO ORDER
+          </button>
+          <!-- ===guantity== -->
+          <div class="row">
+            <div class="col requires">
+              <h5>Total Quantity</h5>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                placeholder=""
+                oninput="handleChange(event)"
+                required
+              />
+            </div>
+          </div>
         </div>
 
-
         <!-- ====================================================== -->
-         <!-- ===========orderInfo======= -->
-         <!-- ======garmentsList======= -->
-         <div class="" id="orderInfo">
-             <h2>Order Info</h2>
-             <div id="showGarmentsbox" class="hidden">
+        <!-- ===========orderInfo======= -->
 
-               <h2>Please list garment style, sizes and color:</h2>
-               <textarea name="garmentsList" id="garmentsList" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt.sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt."></textarea>
-             </div>
-            
-           </div>
+        <!-- =====turn around==== -->
+        <section id="theTurnaround" class="hidden">
+          <!-- ======garmentsList======= -->
+          <div class="hidden" id="orderInfo ">
+            <h2>Order Info</h2>
+            <div id="showGarmentsbox" class="">
+              <h2>Please list garment style, sizes and color:</h2>
+              <textarea
+                name="garmentsList"
+                id="garmentsList"
+                placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt.sit amet consectetur adipisicing elit. Sunt impedit at voluptatum possimus sed nesciunt."
+              ></textarea>
+            </div>
+          </div>
+          <h3>Turnaround</h3>
+          <div class="rows">
+            <h5>Turnaround</h5>
+            <!-- picup -->
+            <div class="raidobx">
+              <div class="flex-start">
+                <input
+                  type="radio"
+                  name="isTurnaround"
+                  id="inChicago"
+                  value="true"
+                  onclick="turnaround()"
+                />
+                <label for="inChicago"
+                  >Pick up in Chicago on date below(NOTE: All orders are set to
+                  be completed at 4:30PM on date requested. If you need the
+                  order completed earlier, please select a sooner date. We are
+                  not open on weekends)</label
+                >
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="isTurnaround"
+                  id="notInChicago"
+                  value="false"
+                  onclick="turnaround()"
+                />
+                <label for="notInChicago"
+                  >Ship order on date below &nbsp; (The day your order will
+                  ship, not arrive) &nbsp; <a href="#">Check transit times</a>
+                </label>
+              </div>
+            </div>
+            <!-- date -->
+            <div class="col container">
+              <label for="date">Date</label>
+              <input type="time" />
+            </div>
+            <!-- daysaround -->
+            <div class="row">
+              <h1>7+ day turnaround</h1>
+            </div>
+            <!-- need4:30 -->
+            <h5>
+              Do you need your order before 4:30pm on the date chosen above?
+            </h5>
+            <p>
+              (If you answer yes, your turnaround time may change and you will
+              be charged extra.)
+            </p>
+            <div class="raioRow">
+              <div class="radiobox">
+                <input type="radio" id="DateYes" name="dateChose" />
+                <label for="DateYes">yes</label>
+              </div>
+              <div class="radiobox">
+                <input type="radio" id="Dateno" name="dateChose" />
+                <label for="Dateno">No</label>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- ====shiping form==== -->
+        <section id="shipingform" class="hidden">
+          <form id="shipingInfo">
+            <div class="row">
+              <div class="col">
+                <label for="shipingname">Shipping Info: Name</label>
+                <input type="text" id="shipingname" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="reciptentCompany">Company Name</label>
+                <input type="text" id="reciptentCompany" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="Address2">Address</label>
+                <input type="text" id="Address" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="Suite2">Apartment/Unit/Suite #</label>
+                <input type="text" id="Suite2" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="city2">city</label>
+                <input type="text" id="city2" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="State2">State</label>
+                <input type="text" id="State2" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="Zip2">Zip</label>
+                <input type="text" id="Zip2" />
+              </div>
+            </div>
+          </form>
+        </section>
+        <!-- =====artwork===== -->
+        <section id="artwork">
+          <h1>Artwork</h1>
+          <input type="file" id="img1" />
+          <label for="img1">
+            <div class="imgContainer">
+              <img src="./image/ohtupload.jpg" alt="png" width="100%" />
+            </div>
+          </label>
+          <input type="file" id="img2" />
+          <label for="img2">
+            <div class="imgContainer">
+              <img src="./image/ohtdesign.jpg" alt="png" width="100%" />
+            </div>
+          </label>
+          <h5>
+            Does your artwork require white ink or a white ink under base?
+          </h5>
+          <p>
+            (If you are printing bright colors on a dark shirt, then your print
+            requires a white ink under base.)
+          </p>
+          <div class="container">
+            <div class="radiobox">
+              <input type="radio" id="id1" name="artwork" />
+              <label for="id1">yes</label>
+            </div>
+            <div class="radiobox">
+              <input type="radio" id="id2" name="artwork" />
+              <label for="id2">no</label>
+            </div>
+            <div class="radiobox">
+              <input type="radio" id="id3" name="artwork" />
+              <label for="id3">Not Sure (see colorchart)</label>
+            </div>
+          </div>
+          <div class="container">
+            <h5>
+              Would you like your image over sized? ($2.99 per print, dark color
+              garments $3.99 per print)
+            </h5>
+            <p>
+              (14 wide x 16 tall printing is available for unisex sizes only.)
+            </p>
+            <p>
+              (Our standard max print size is 12 x 12 inches for unisex sizes
+              and 10 x 12 inches for ladies and youth.)
+            </p>
+            <div class="container">
+              <div class="radiobox">
+                <input type="radio" id="id01" name="artwork1" />
+                <label for="id01">yes</label>
+              </div>
+              <div class="radiobox">
+                <input type="radio" id="id02" name="artwork1" />
+                <label for="id02">no</label>
+              </div>
+            </div>
+            <div class="container">
+              <div>
+                <label for="commentss">Comments</label>
+                <textarea name="commentss" id="commentss"></textarea>
+              </div>
+              <div>
+                <p><label for="cuppon">Coupon Code</label></p>
+                <input type="text" id="cuppon" name="cuppon" />
+              </div>
+            </div>
+          </div>
+        </section>
         <!-- ===============form button========== -->
-         <!-- ===============form button========== -->
+        <!-- ===============form button========== -->
         <button type="button" class="submitBTN" onclick="handleClick()">
           Next
         </button>

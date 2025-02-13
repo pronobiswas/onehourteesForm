@@ -1,3 +1,7 @@
+let sectionYes = document.getElementById("section-yes");
+  let sectionNo = document.getElementById("section-no");
+  let theTurnaround = document.getElementById("theTurnaround");
+  let shipingform = document.getElementById("shipingform")
 // ======get input value=====
 let formData = {
   fullname:"",
@@ -5,12 +9,14 @@ let formData = {
   companyName:"",
   phone:"",
   about:"",
+  reOrder:'false',
   invoiceNumber:"",
   garmentsType:"",
-    color:"",
-    size:"",
-    quantity:"",
-    garmentsList:"",
+  color:"",
+  size:"",
+  quantity:"",
+  garmentsList:"",
+  isTurnaround:"",
   
   // name: document.getElementById("fullname").value.trim(),
   // email: document.getElementById("Email").value.trim(),
@@ -23,21 +29,37 @@ let formData = {
 };
 let isValidate = false;
 let showGarmentsbox = false;
+let isValid = true;
+let showTurnAround = false;
 
 // ====handle input change====
 function handleChange(event){
+  console.log(event.target);
+  
   formData={
     ...formData,
     [event.target.name] : event.target.value.trim()
   }
-  validateForm()
+  validateForm();
+  
+   // ==========showGarmentsbox========
+  //  if(!formData.garmentsType || !formData.color || !formData.size || !formData.quantity){
+  //   showGarmentsbox = false;
+  // }else{
+  //   showGarmentsbox=true
+  // }
+  // if(showGarmentsbox){
+  //   document.getElementById("showGarmentsbox").classList.remove("hidden")
+  // }else{
+  //   document.getElementById("showGarmentsbox").classList.add("hidden")
+  // }
   
 }
 // =====form validation===
+// =====form validation===
 function validateForm() {
-  console.log("form validation");
+  
 
-  let isValid = true;
   // =====name error=====
   if(!formData.fullname){
     document.getElementById("nameError").innerHTML = "Please fill in this field";
@@ -73,31 +95,34 @@ function validateForm() {
    
   // ========check the validetion=======(first)
   if(!formData.fullname || !formData.email || !formData.phone || !formData.about){
-    isValid=false
+    isValid=false;
+  }else{
+    isValid = true;
   }
-  // ======hide or show by addeding classlist=========
+  // ======hide or show REORDER by addeding classlist=========
   if(isValid){
     document.getElementById('reOrder').classList.remove("hidden")
   }else{
     document.getElementById('reOrder').classList.add("hidden")
   }
   // =======invoice validate======
-  if (formData.invoiceNumber) {
-    document.getElementById('lastOrder').classList.remove("hidden")
-    console.log(formData.invoiceNumber.length>3);
-    
-  }
-  // ==========showGarmentsbox========
-  if(!formData.garmentsType || !formData.color || !formData.size){
-    showGarmentsbox = false;
+  if (formData.invoiceNumber.length>5) {
+    document.getElementById('lastOrder').classList.remove("hidden");
   }else{
-    showGarmentsbox=true
+    document.getElementById('lastOrder').classList.add("hidden");
   }
-  if(showGarmentsbox){
-    document.getElementById("showGarmentsbox").classList.remove("hidden")
+
+  // =========turnaround=====
+  if(!formData.garmentsType || !formData.size || !formData.quantity){
+    showTurnAround = false;
   }else{
-    document.getElementById("showGarmentsbox").classList.add("hidden")
+    showTurnAround= true;
   }
+  if(showTurnAround){
+    theTurnaround.classList.remove("hidden");
+  }
+
+
 
 
 
@@ -129,25 +154,38 @@ function validateForm() {
   // }
 }
 
+
 function toggleSections() {
   let choice = document.querySelector('input[name="choice"]:checked').value;
-  let sectionYes = document.getElementById("section-yes");
-  let sectionNo = document.getElementById("section-no");
-
   if (choice === "yes") {
+    formData.reOrder = "true"
     sectionYes.classList.remove("hidden");
     sectionNo.classList.add("hidden");
   } else if (choice === "no") {
+    formData.reOrder = false;
     sectionNo.classList.remove("hidden");
     sectionYes.classList.add("hidden");
   }
+}
+
+function turnaround(){
+  let pickup = document.querySelector('input[name="isTurnaround"]:checked').value;
+  formData.isTurnaround = pickup;
+  console.log(pickup);
+
+  if (pickup === "true") {
+    shipingform.classList.remove("hidden")
+    
+  } else if (pickup === "false") {
+    shipingform.classList.add("hidden");
+  }
+  
 }
 
 
 // ========handle submit=======
 function handleClick(){
   console.log(formData);
-  console.log(showGarmentsbox);
-  
+  console.log(theTurnaround);
   
 }
