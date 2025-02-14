@@ -21,6 +21,7 @@ let formData = {
   size: "",
   quantity: "",
   garmentsList: "",
+  lastOrder: "",
   isTurnaround: "",
 
   // name: document.getElementById("fullname").value.trim(),
@@ -46,27 +47,20 @@ function handleChange(event) {
   validateForm();
 
   // ==========showGarmentsbox========
-   if(!formData.garmentsType || !formData.color || !formData.size || !formData.quantity){
-    showGarmentsbox = false;
-  }else{
-    showGarmentsbox=true
-  }
-  if(showGarmentsbox){
-    document.getElementById("showGarmentsbox").classList.remove("hidden");
-    document.getElementById("artwork").classList.remove("hidden");
-    document.getElementById("artwork").classList.add("animateContainer");
-  }else{
-    document.getElementById("showGarmentsbox").classList.add("hidden")
-  }
+  //  if(!formData.garmentsType || !formData.color || !formData.size || !formData.quantity){
+  //   showGarmentsbox = false;
+  // }else{
+  //   showGarmentsbox=true
+  // }
+  // if(showGarmentsbox){
+  //   document.getElementById("showGarmentsbox").classList.remove("hidden");
+  //   document.getElementById("artwork").classList.remove("hidden");
+  //   document.getElementById("artwork").classList.add("animateContainer");
+  // }else{
+  //   document.getElementById("showGarmentsbox").classList.add("hidden")
+  // }
 }
-function showtheartwork(){
-  let isArt = formData.garmentsType && formData.quantity
-  console.log(isArt);
-  console.log(showGarmentsbox);
-  // if(true){}
-  
-  // document.getElementById("artwork").classList.remove("hidden")
-}
+
 // =====form validation===
 // =====form validation===
 function validateForm() {
@@ -126,6 +120,7 @@ function validateForm() {
   // =======invoice validate======
   if (formData.invoiceNumber.length > 5) {
     document.getElementById("lastOrder").classList.remove("hidden");
+    document.getElementById("lastOrder").classList.add("animateContainer");
   } else {
     document.getElementById("lastOrder").classList.add("hidden");
   }
@@ -138,9 +133,8 @@ function validateForm() {
   }
   if (showTurnAround) {
     theTurnaround.classList.remove("hidden");
+    theTurnaround.classList.add("animateContainer");
   }
-
-  
 }
 
 function toggleSections() {
@@ -151,7 +145,6 @@ function toggleSections() {
     sectionYes.classList.add("animateContainer");
     sectionNo.classList.add("hidden");
     console.log(sectionYes);
-    
   } else if (choice === "no") {
     formData.reOrder = false;
     sectionNo.classList.remove("hidden");
@@ -160,18 +153,17 @@ function toggleSections() {
   }
 }
 function lastOrder() {
-  console.log("lastorder");
-  console.log(orderInfo);
-  
   let isSameAslastOrder = document.querySelector(
     'input[name="choice1"]:checked'
   ).value;
+  formData.lastOrder = isSameAslastOrder;
   if (isSameAslastOrder === "true") {
     theTurnaround.classList.remove("hidden");
+    theTurnaround.classList.add("animateContainer");
     orderInfo.classList.add("hidden");
-    orderInfo.classList.add("animateContainer");
   } else if (isSameAslastOrder === "false") {
     orderInfo.classList.remove("hidden");
+    orderInfo.classList.add("animateContainer");
     theTurnaround.classList.remove("hidden");
   }
 }
@@ -183,20 +175,23 @@ function turnaround() {
 
   if (pickup === "true") {
     artwork.classList.remove("hidden");
+    artwork.classList.add("animateContainer");
     shipingform.classList.add("hidden");
-
-    if ((formData.reOrder = true)) {
-      artwork.classList.remove("hidden");
-      shipingform.classList.add("hidden");
+    if (formData.lastOrder == "true") {
+      artwork.classList.add("hidden");
       submiltlist.classList.remove("hidden");
     }
   } else if (pickup === "false") {
     shipingform.classList.remove("hidden");
+    shipingform.classList.add("animateContainer");
     artwork.classList.remove("hidden");
-    if (formData.reOrder == "true") {
+    artwork.classList.add("animateContainer");
+    if (formData.lastOrder === "true") {
       artwork.classList.add("hidden");
       shipingform.classList.remove("hidden");
       submiltlist.classList.remove("hidden");
+    } else if (formData.lastOrder === "false") {
+      artwork.classList.remove("hidden");
     }
   }
 }
