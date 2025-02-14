@@ -54,6 +54,7 @@ function handleChange(event) {
   if(showGarmentsbox){
     document.getElementById("showGarmentsbox").classList.remove("hidden");
     document.getElementById("artwork").classList.remove("hidden");
+    document.getElementById("artwork").classList.add("animateContainer");
   }else{
     document.getElementById("showGarmentsbox").classList.add("hidden")
   }
@@ -120,7 +121,7 @@ function validateForm() {
   // ======hide or show REORDER by addeding classlist=========
   if (isValid) {
     document.getElementById("reOrder").classList.remove("hidden");
-    document.getElementById("lastOrder").classList.add("animateContainer");
+    document.getElementById("reOrder").classList.add("animateContainer");
   }
   // =======invoice validate======
   if (formData.invoiceNumber.length > 5) {
@@ -154,6 +155,7 @@ function toggleSections() {
   } else if (choice === "no") {
     formData.reOrder = false;
     sectionNo.classList.remove("hidden");
+    sectionNo.classList.add("animateContainer");
     sectionYes.classList.add("hidden");
   }
 }
