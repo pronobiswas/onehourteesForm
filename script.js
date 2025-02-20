@@ -23,6 +23,13 @@ let formData = {
   garmentsList: "",
   lastOrder: "",
   isTurnaround: "",
+  shipingname: "",
+  reciptentCompany: "",
+  shipingAddress: "",
+  shipingSuite: "",
+  shipingcity: "",
+  shipingState: "",
+  shipingZip: "",
 
   // name: document.getElementById("fullname").value.trim(),
   // email: document.getElementById("Email").value.trim(),
@@ -202,9 +209,43 @@ function artworkradio() {
 
 // ========handle submit=======
 function handleClick() {
+  console.log(formData);
+
   if (!formData.reOrder == "") {
     console.log(typeof formData.reOrder);
   } else {
     console.log(formData.reOrder);
   }
+  let serviceID = 'service_mgaa7q8';
+  let templateID = 'template_j467516';
+  let templateParams = {
+    name: formData.fullname,
+    email: formData.email,
+    companyName: formData.companyName,
+    phone: formData.phone,
+    about: formData.about,
+    reOrder: formData.reOrder,
+    invoiceNumber: formData.invoiceNumber,
+    garmentsType: formData.garmentsType,
+    color: formData.color,
+    size: formData.size,
+    quantity: formData.quantity,
+    lastOrder: formData.lastOrder,
+    isTurnaround: formData.isTurnaround,
+    
+    shipingname: formData.shipingname,
+    reciptentCompany: formData.reciptentCompany,
+    shipingAddress: formData.shipingAddress,
+    shipingcity: formData.shipingcity,
+    shipingState: formData.shipingState,
+    shipingZip: formData.shipingZip,
+  };
+  // these IDs from the previous steps
+
+  emailjs.send('service_mgaa7q8', 'template_j467516', templateParams)
+    .then(() => {
+      console.log('SUCCESS!');
+    }, (error) => {
+      console.log('FAILED...', error);
+    });
 }

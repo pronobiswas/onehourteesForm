@@ -13,6 +13,8 @@
       rel="stylesheet"
     />
     <!-- *****fontfamily**** -->
+       <!-- *****EmailJS***** -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   </head>
 
   <body>
@@ -319,43 +321,43 @@
             <div class="row">
               <div class="col">
                 <label for="shipingname">Shipping Info: Name</label>
-                <input type="text" id="shipingname" />
+                <input type="text" id="shipingname" name="shipingname" oninput="handleChange(event)" />
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <label for="reciptentCompany">Company Name</label>
-                <input type="text" id="reciptentCompany" />
+                <input type="text" id="reciptentCompany" name="reciptentCompany" oninput="handleChange(event)" />
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <label for="Address2">Address</label>
-                <input type="text" id="Address" />
+                <label for="shipingAddress">Address</label>
+                <input type="text" id="shipingAddress" name="shipingAddress" oninput="handleChange(event)"/>
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <label for="Suite2">Apartment/Unit/Suite #</label>
-                <input type="text" id="Suite2" />
+                <label for="shipingSuite">Apartment/Unit/Suite #</label>
+                <input type="text" id="shipingSuite" name="shipingSuite" oninput="handleChange(event)" />
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <label for="city2">city</label>
-                <input type="text" id="city2" />
+                <label for="shipingcity">city</label>
+                <input type="text" id="shipingcity" name="shipingcity" oninput="handleChange(event)"/>
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <label for="State2">State</label>
-                <input type="text" id="State2" />
+                <label for="shipingState">State</label>
+                <input type="text" id="shipingState" name="shipingState" oninput="handleChange(event)" />
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <label for="Zip2">Zip</label>
-                <input type="text" id="Zip2" />
+                <label for="shipingZip">Zip</label>
+                <input type="number" min="4" max="5" id="shipingZip" name="shipingZip" oninput="handleChange(event)" />
               </div>
             </div>
           </form>
@@ -532,5 +534,14 @@
     </div>
 
     <script src="script.js"></script>
+    <script type="text/javascript">
+      (function () {
+        // https://dashboard.emailjs.com/admin/account
+        emailjs.init({
+          publicKey: "hGXnZ_IzZesvJopYp",
+        });
+      })();
+    </script>
+    
   </body>
 </html>
