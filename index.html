@@ -978,13 +978,13 @@
       let selectedDate = new Date(formData.estimateDate);
       let timeDiff = selectedDate - today;
       let daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-      console.log(daysLeft);
       
-
-      if(!formData.reOrder || !formData.lastOrder || !formData.isTurnaround || !formData.extraCharge){
+      if(!formData.reOrder || !formData.isTurnaround || !formData.extraCharge){
+        isAbleSubmit ="false"
+      }else{
         isAbleSubmit ="true"
       }
-      console.log(!isAbleSubmit);
+      
       
       if(isAbleSubmit){
         document.getElementById("submitBtn").classList.remove("hidden");
