@@ -46,7 +46,7 @@
     .animateContainer {
       position: relative;
       width: 100%;
-      padding: 8px;
+      /* padding: 8px; */
       border: 1px solid transparent;
       border-radius: 5px;
       animation-name: myanim;
@@ -224,7 +224,7 @@
       width: fit-content;
     }
 
-    .submitBTN {
+    .nextBTN {
       font-size: 20px;
       padding: 10px 30px;
       background-color: var(--primary);
@@ -281,6 +281,14 @@
       padding: 5px;
       border: 1px solid #e40061;
       background-color: #e4006334;
+    }
+    .submitBtn{
+      padding: 8px 20px;
+      background: #e40061;
+      color: white;
+      border-radius: 5px;
+      outline: none;
+      border: none;
     }
   </style>
   <!-- =======style======= -->
@@ -684,9 +692,10 @@
       </sectioin>
       <!-- ===============form button========== -->
       <!-- ===============form button========== -->
-      <button type="button" class="submitBTN" id="submitBTN" onclick="handleClick()">
+      <button type="button" class="nextBTN" id="nextBTN" onclick="handleNext()">
         Next
       </button>
+      <button id="submitBtn" class="submitBtn hidden" >Submit</button>
     </form>
   </div>
 
@@ -707,7 +716,7 @@
     const app = initializeApp(firebaseConfig);
     const storage = getStorage(app);
 // ====submit=====
-    document.getElementById("submitBTN").addEventListener("click", async () => {
+    document.getElementById("submitBtn").addEventListener("click", async () => {
       if(!formData.estimateDate){
         estimateDateRow.classList.add("requireBox");
         alert("date is required");
@@ -746,7 +755,7 @@
 
   <!-- ======inititlize email js==== -->
   <script>
-
+   
 
     let sectionYes = document.getElementById("section-yes");
     let sectionNo = document.getElementById("section-no");
@@ -756,7 +765,7 @@
     let artwork = document.getElementById("artwork");
     let submiltlist = document.getElementById("submiltlist");
     let extraChargeRow = document.getElementById("extraChargeRow");
-    let submitBTN = document.getElementById("submitBTN");
+    let nextBTN = document.getElementById("nextBTN");
     let estimateDateRow = document.getElementById("estimateDateRow");
     let div = document.querySelector(".col");
     let formData = {
@@ -953,25 +962,41 @@
       console.log(value);
       formData.extraCharge = value;
       if(formData.extraCharge){
-        submitBTN.innerText="submit"
+        nextBTN.innerText="submit"
       }
       if(!formData.extraCharge){
-        submitBTN.innerText="Next"
+        nextBTN.innerText="Next"
       }
       
     }
-    function handleClick() {
+
+
+    function handleNext() {
+      let isAbleSubmit = "false";
       console.log("from handleclick function");
       let today = new Date();
       let selectedDate = new Date(formData.estimateDate);
       let timeDiff = selectedDate - today;
       let daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-
       console.log(daysLeft);
       
+
+      if(!formData.reOrder || !formData.lastOrder || !formData.isTurnaround || !formData.extraCharge){
+        isAbleSubmit ="true"
+      }
+      console.log(!isAbleSubmit);
       
+      if(isAbleSubmit){
+        document.getElementById("submitBtn").classList.remove("hidden");
+        document.getElementById("nextBTN").classList.add("hidden");
+      }else{
+        document.getElementById("submitBtn").classList.add("hidden");
+        document.getElementById("nextBTN").classList.remove("hidden");
+      }
 
     }
+
+
 
     function sentMail() {
       let serviceID = 'service_xa2qkga';
