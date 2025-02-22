@@ -1,3 +1,33 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB_mMjOXCr6v5fPzhI6PLKPyUDxnz_g5VY",
+    authDomain: "varaghar121.firebaseapp.com",
+    projectId: "varaghar121",
+    storageBucket: "varaghar121.appspot.com",
+    messagingSenderId: "915326723380",
+    appId: "1:915326723380:web:1c84b8b43f7f0b1565f161"
+};
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
+async function uploadImage () {
+    const file = document.getElementById("fileInput").files[0];
+    if (!file) return alert("Select an image!");
+
+    const storageRef = ref(storage, "images/" + file.name);
+    await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(storageRef);
+
+    document.getElementById("preview").src = url; // Display image
+    console.log("Uploaded Image URL:", url);
+};
+
+
+
+// ========================================
 let sectionYes = document.getElementById("section-yes");
 let sectionNo = document.getElementById("section-no");
 let theTurnaround = document.getElementById("theTurnaround");
@@ -30,15 +60,9 @@ let formData = {
   shipingcity: "",
   shipingState: "",
   shipingZip: "",
+  imageUrl:","
 
-  // name: document.getElementById("fullname").value.trim(),
-  // email: document.getElementById("Email").value.trim(),
-  // companyName: document.getElementById("CompanyName").value.trim(),
-  // phone: document.getElementById("Phone").value.trim(),
-  // about: document.getElementById("about").value.trim(),
-  // gender: document.querySelector('input[name="gender"]:checked')
-  //   ? document.querySelector('input[name="gender"]:checked').value
-  //   : "",
+
 };
 let isValidate = false;
 let showGarmentsbox = false;
@@ -53,19 +77,7 @@ function handleChange(event) {
   };
   validateForm();
 
-  // ==========showGarmentsbox========
-  //  if(!formData.garmentsType || !formData.color || !formData.size || !formData.quantity){
-  //   showGarmentsbox = false;
-  // }else{
-  //   showGarmentsbox=true
-  // }
-  // if(showGarmentsbox){
-  //   document.getElementById("showGarmentsbox").classList.remove("hidden");
-  //   document.getElementById("artwork").classList.remove("hidden");
-  //   document.getElementById("artwork").classList.add("animateContainer");
-  // }else{
-  //   document.getElementById("showGarmentsbox").classList.add("hidden")
-  // }
+
 }
 
 // =====form validation===
@@ -125,7 +137,7 @@ function validateForm() {
     document.getElementById("reOrder").classList.add("animateContainer");
   }
   // =======invoice validate======
-  if (formData.invoiceNumber.length > 5) {
+  if (formData.invoiceNumber.length > 3) {
     document.getElementById("lastOrder").classList.remove("hidden");
     document.getElementById("lastOrder").classList.add("animateContainer");
   } else {
@@ -151,14 +163,16 @@ function toggleSections() {
     sectionYes.classList.remove("hidden");
     sectionYes.classList.add("animateContainer");
     sectionNo.classList.add("hidden");
-    console.log(sectionYes);
+    artwork.classList.add("hidden");
   } else if (choice === "no") {
     formData.reOrder = false;
     sectionNo.classList.remove("hidden");
+    artwork.classList.remove("hidden");
     sectionNo.classList.add("animateContainer");
     sectionYes.classList.add("hidden");
   }
 }
+// lastOrder
 function lastOrder() {
   let isSameAslastOrder = document.querySelector(
     'input[name="choice1"]:checked'
@@ -208,16 +222,12 @@ function artworkradio() {
 }
 
 // ========handle submit=======
-function handleClick() {
-  console.log(formData);
-
-  if (!formData.reOrder == "") {
-    console.log(typeof formData.reOrder);
-  } else {
-    console.log(formData.reOrder);
-  }
+// ========handle submit=======
+async function  handleClick() {
+  
   let serviceID = 'service_mgaa7q8';
   let templateID = 'template_j467516';
+
   let templateParams = {
     name: formData.fullname,
     email: formData.email,
@@ -232,7 +242,7 @@ function handleClick() {
     quantity: formData.quantity,
     lastOrder: formData.lastOrder,
     isTurnaround: formData.isTurnaround,
-    
+
     shipingname: formData.shipingname,
     reciptentCompany: formData.reciptentCompany,
     shipingAddress: formData.shipingAddress,
@@ -242,10 +252,11 @@ function handleClick() {
   };
   // these IDs from the previous steps
 
-  emailjs.send('service_mgaa7q8', 'template_j467516', templateParams)
+  emailjs.send('service_xa2qkga', 'template_b67s4xa', templateParams)
     .then(() => {
       console.log('SUCCESS!');
     }, (error) => {
       console.log('FAILED...', error);
     });
 }
+console.log("hello");
